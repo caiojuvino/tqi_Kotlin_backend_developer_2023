@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/jumarket?createDatabaseIfNotExist=true
+    username: root
+    password: root
+  jpa:
+    show-sql: true
+    hibernate:
+      properties:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+  #  hibernate:
+  #    ddl-auto: create-drop

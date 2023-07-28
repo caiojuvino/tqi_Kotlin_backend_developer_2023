@@ -1,0 +1,11 @@
+CREATE TABLE venda (
+  id BIGINT AUTO_INCREMENT NOT NULL,
+   id_carrinho BIGINT NOT NULL,
+   tipo_de_pagamento VARCHAR(255) NULL,
+   total DECIMAL NOT NULL,
+   CONSTRAINT pk_venda PRIMARY KEY (id)
+);
+
+ALTER TABLE venda ADD CONSTRAINT uc_venda_total UNIQUE (total);
+
+ALTER TABLE venda ADD CONSTRAINT FK_VENDA_ON_ID_CARRINHO FOREIGN KEY (id_carrinho) REFERENCES carrinho (id);
