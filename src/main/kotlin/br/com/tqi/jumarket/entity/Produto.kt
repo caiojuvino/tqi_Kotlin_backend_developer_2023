@@ -10,11 +10,12 @@ data class Produto(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_categoria", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY,
+        cascade = [CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE])
+    @JoinColumn(name = "id_categoria")
     var categoria: Categoria,
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     var nome: String,
 
     var unidadeDeMedida: String,
