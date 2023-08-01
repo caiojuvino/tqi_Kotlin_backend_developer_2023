@@ -6,6 +6,7 @@ interface ICategoriaService {
     fun buscarTodos(): List<Categoria>
     fun salvar(categoria: Categoria): Categoria
     fun buscarPorId(id: Long): Categoria
-    fun atualizar(id: Long, categoriaAtualizada: Categoria) : Categoria
+    fun buscarPorNome(nome: String): Categoria
+    fun atualizar(id: Long, categoria: Categoria) : Categoria
     fun remover(id: Long): String
 }

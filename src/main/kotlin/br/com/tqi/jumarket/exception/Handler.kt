@@ -2,6 +2,7 @@ package br.com.tqi.jumarket.exception
 
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
@@ -33,4 +34,10 @@ class Handler {
     @ExceptionHandler(BadRequestException::class)
     fun handleBadRequestException(ex: BadRequestException)
     : ResponseEntity<String> = ResponseEntity(ex.message, HttpStatus.BAD_REQUEST)
+
+    @ExceptionHandler(HttpMessageNotReadableException::class)
+    fun handleHttpMessageNotReadableException()
+    : ResponseEntity<String> = ResponseEntity(
+        "Formato de JSON inválido. Consulte a documentação", HttpStatus.BAD_REQUEST
+    )
 }

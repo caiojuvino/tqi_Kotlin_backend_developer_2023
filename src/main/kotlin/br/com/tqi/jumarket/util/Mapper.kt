@@ -1,14 +1,16 @@
 package br.com.tqi.jumarket.util
 
-import br.com.tqi.jumarket.dto.CategoriaDto
+import br.com.tqi.jumarket.dto.CarrinhoDto
+import br.com.tqi.jumarket.dto.CategoriaRequest
 import br.com.tqi.jumarket.dto.ProdutoDto
+import br.com.tqi.jumarket.entity.Carrinho
 import br.com.tqi.jumarket.entity.Categoria
 import br.com.tqi.jumarket.entity.Produto
 
 class Mapper {
     companion object {
-        fun paraCategoria(dto: CategoriaDto): Categoria =
-            dto.run { Categoria(this.id, this.nome) }
+        fun paraCategoria(dto: CategoriaRequest): Categoria =
+            Categoria(nome = dto.nome.lowercase())
 
         fun paraProduto(dto: ProdutoDto): Produto =
             dto.run { Produto(
@@ -19,8 +21,11 @@ class Mapper {
                 this.preco
             ) }
 
-        fun paraDto(categoria: Categoria): CategoriaDto =
-            categoria.run { CategoriaDto(this.id, this.nome) }
+        fun paraCarrinho(dto: CarrinhoDto): Carrinho =
+            dto.run { Carrinho(
+                this.id,
+                this.itens
+            ) }
 
         fun paraDto(produto: Produto): ProdutoDto =
             produto.run { ProdutoDto(
@@ -29,6 +34,12 @@ class Mapper {
                 this.nome,
                 this.unidadeDeMedida,
                 this.preco
+            ) }
+
+        fun paraDto(carrinho: Carrinho): CarrinhoDto =
+            carrinho.run { CarrinhoDto(
+                this.id,
+                this.itens
             ) }
     }
 }

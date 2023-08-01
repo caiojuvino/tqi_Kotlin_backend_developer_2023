@@ -15,8 +15,8 @@ class ProdutoController (
     private val service : ProdutoService
 ){
     @GetMapping
-    fun buscarTodos(): ResponseEntity<List<ProdutoDto>> {
-        val lista = service.buscarTodos().stream().map { p: Produto -> Mapper.paraDto(p) }
+    fun buscarTudo(): ResponseEntity<List<ProdutoDto>> {
+        val lista = service.buscarTudo().stream().map { p: Produto -> Mapper.paraDto(p) }
             .collect(Collectors.toList())
         return ResponseEntity.ok(lista)
     }
@@ -39,6 +39,14 @@ class ProdutoController (
         val produto = service.buscarPorId(id)
         val dto = Mapper.paraDto(produto)
         return ResponseEntity.status(HttpStatus.OK).body(dto)
+    }
+
+    @GetMapping("/categoria")
+    fun buscarPorCategoria(@RequestParam nome: String): ResponseEntity<List<ProdutoDto>> {
+        val lista = service.buscarPorCategoria(nome).stream().map {
+                p: Produto -> Mapper.paraDto(p)
+            }.collect(Collectors.toList())
+        return ResponseEntity.status(HttpStatus.OK).body(lista)
     }
 
     @PatchMapping("/{id}")
